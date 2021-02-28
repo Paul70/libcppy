@@ -8,3 +8,16 @@ if(NOT PROJECT_NAME)
         LANGUAGES C CXX)
 endif()
 
+set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules)
+include(ProjectSettings)
+include(HeaderTesting)
+
+option(LIBCPPY_BUILD_HEADER_TEST "Test all libcppy C++ headers using a stand-alone main" ON)
+option(LIBCPPY_BUILD_TESTS       "Build libcppy Google Test test suite" ON)
+
+if(LIBCPPY_BUILD_TESTS)
+    add_subdirectory(thirdparty/googletest)
+endif()
+if(LIBCPPY_BUILD_HEADER_TESTS)
+    add_subdirectory(header_tests)
+endif()
